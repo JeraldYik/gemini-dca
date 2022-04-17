@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "target": "es5",
+    "outDir": ".build",
+    "moduleResolution": "node",
+    "lib": ["ESNext"],
+    "rootDir": ".",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "typeRoots": ["node_modules/@types", "types/vendor"]
+  }
+}

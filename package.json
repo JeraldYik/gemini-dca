@@ -1,0 +1,27 @@
+{
+  "name": "gemini-dca",
+  "version": "1.0.0",
+  "description": "Personal automation scheduled logic to perform DCA into Gemini CEX",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "source sandbox.env && ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeraldYik/gemini-dca.git"
+  },
+  "author": "Jerald Yik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeraldYik/gemini-dca/issues"
+  },
+  "homepage": "https://github.com/JeraldYik/gemini-dca#readme",
+  "devDependencies": {
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "gemini-api": "^2.0.4"
+  }
+}
