@@ -1,12 +1,12 @@
-import { TICKERS } from "../../src/utils/constants";
-import cancelOrder from "../../src/services/gemini/cancelOrder";
-import createNewOrder from "../../src/services/gemini/createNewOrder";
+import { TICKERS } from "../../../src/utils/constants";
+import cancelOrder from "../../../src/services/gemini/cancelOrder";
+import createNewOrder from "../../../src/services/gemini/createNewOrder";
 import { expect } from "chai";
-import getOrderStatus from "../../src/services/gemini/getOrderStatus";
-import getTickerBestBidPrice from "../../src/services/gemini/getTickerBestBidPrice";
+import getOrderStatus from "../../../src/services/gemini/getOrderStatus";
+import getTickerBestBidPrice from "../../../src/services/gemini/getTickerBestBidPrice";
 
-describe("UNIT TEST: Get Order Status", async () => {
-  const TICKER = "btcsgd";
+describe("UNIT TEST: Get Order Status on Gemini", async () => {
+  const TICKER = TICKERS.BTC.symbol;
   let orderId: string;
 
   before(async () => {
