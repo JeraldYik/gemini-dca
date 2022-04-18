@@ -63,12 +63,13 @@ declare module "gemini-api" {
      */
     newOrder(params: Params.NewOrder): Promise<OrderStatus>;
 
+    // edited
     /**
      * This will cancel an order. If the order is already canceled, the message
      * will succeed but have no effect.
-     * @param params
+     * @order_id id of order
      */
-    cancelOrder(params: Params.CancelOrder): Promise<OrderStatus>;
+    cancelOrder({ order_id }: { order_id: string }): Promise<OrderStatus>;
 
     /**
      * Cancel all orders for this session.
@@ -81,11 +82,12 @@ declare module "gemini-api" {
      */
     cancelAllActiveOrders(): Promise<{ result: boolean }>;
 
+    // edited
     /**
      * Gets the status for an order
-     * @param params
+     * @order_id id of order
      */
-    getMyOrderStatus(params: Params.OrderStatus): Promise<OrderStatus>;
+    getMyOrderStatus({ order_id }: { order_id: string }): Promise<OrderStatus>;
 
     /**
      * Returns active orders for the session account.
@@ -120,10 +122,6 @@ declare module "gemini-api" {
     | "auction-only";
 
   export namespace Params {
-    interface CancelOrder {
-      client_order_id: string;
-    }
-
     interface OrderStatus {
       client_order_id: string;
     }
@@ -134,8 +132,8 @@ declare module "gemini-api" {
       amount: string;
       price: string;
       side: OrderSide;
-      type: OrderType;
-      options?: OrderExecutionOption;
+      type?: OrderType; // edited
+      options: OrderExecutionOption[]; // edited
     }
 
     interface AuctionHistory {
