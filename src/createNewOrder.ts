@@ -2,6 +2,7 @@ import { OrderStatus, TickerMetadata } from "../types";
 
 import GeminiAPI from "gemini-api";
 import { ORDER_PRICE_TO_BID_PRICE_RATIO } from "./utils/constants";
+import { logger } from "./utils/logger";
 
 const createNewOrder = async (
   restClient: GeminiAPI,
@@ -19,12 +20,24 @@ const createNewOrder = async (
       side: "buy",
       options: ["maker-or-cancel"],
     });
-    console.log(orderStatusData);
-  } catch (err) {
-    throw new Error(JSON.stringify(err));
+    logger.info({
+      message: "Created Order Status data",
+      meta: {
+        symbol: tickerMetadata.symbol,
+        orderStatusData,
+      },
+    });
+  } catch (error) {
+    logger.error({
+      message: "Failed to create order",
+      meta: {
+        symbol: tickerMetadata.symbol,
+      },
+      error,
+    });
   }
 
-  return orderStatusData;
+  return orderStatusData!;
 };
 
 export default createNewOrder;

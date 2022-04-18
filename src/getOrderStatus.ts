@@ -1,5 +1,6 @@
 import GeminiAPI from "gemini-api";
 import { OrderStatus } from "../types";
+import { logger } from "./utils/logger";
 
 const getOrderStatus = async (
   restClient: GeminiAPI,
@@ -8,11 +9,24 @@ const getOrderStatus = async (
   let orderStatusData: OrderStatus;
   try {
     orderStatusData = await restClient.getMyOrderStatus({ order_id: orderId });
-  } catch (err) {
-    throw new Error(JSON.stringify(err));
+    logger.info({
+      message: "Order Status data",
+      meta: {
+        orderId,
+        orderStatusData,
+      },
+    });
+  } catch (error) {
+    logger.error({
+      message: "Failed to get order status data",
+      meta: {
+        orderId,
+      },
+      error,
+    });
   }
 
-  return orderStatusData;
+  return orderStatusData!;
 };
 
 export default getOrderStatus;

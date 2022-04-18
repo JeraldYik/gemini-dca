@@ -1,5 +1,7 @@
 import GeminiAPI, { Ticker } from "gemini-api";
 
+import { logger } from "./utils/logger";
+
 const getTickerBestBidPrice = async (
   restClient: GeminiAPI,
   ticker: string
@@ -7,12 +9,24 @@ const getTickerBestBidPrice = async (
   let tickerData: Ticker;
   try {
     tickerData = await restClient.getTicker(ticker);
-    console.log(tickerData);
-  } catch (err) {
-    throw new Error(JSON.stringify(err));
+    logger.info({
+      message: "Ticker data",
+      meta: {
+        ticker,
+        tickerData,
+      },
+    });
+  } catch (error) {
+    logger.error({
+      message: "Failed to get ticker data",
+      meta: {
+        ticker,
+      },
+      error,
+    });
   }
 
-  return parseFloat(tickerData.bid);
+  return parseFloat(tickerData!.bid);
 };
 
 export default getTickerBestBidPrice;
