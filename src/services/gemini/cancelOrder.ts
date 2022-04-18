@@ -1,6 +1,6 @@
-import { OrderStatus } from "../types";
-import { REST_CLIENT } from "./utils/setup";
-import { logger } from "./utils/logger";
+import { OrderStatus } from "../../../types";
+import { REST_CLIENT } from "../../utils/setup";
+import { logger } from "../../utils/logger";
 
 const cancelOrder = async (orderId: string): Promise<OrderStatus> => {
   let orderStatusData: OrderStatus;

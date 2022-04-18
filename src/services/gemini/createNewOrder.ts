@@ -1,8 +1,8 @@
-import { OrderStatus, TickerMetadata } from "../types";
+import { OrderStatus, TickerMetadata } from "../../../types";
 
-import { ORDER_PRICE_TO_BID_PRICE_RATIO } from "./utils/constants";
-import { REST_CLIENT } from "./utils/setup";
-import { logger } from "./utils/logger";
+import { ORDER_PRICE_TO_BID_PRICE_RATIO } from "../../utils/constants";
+import { REST_CLIENT } from "../../utils/setup";
+import { logger } from "../../utils/logger";
 
 const createNewOrder = async (
   tickerMetadata: TickerMetadata,

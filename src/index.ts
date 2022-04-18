@@ -1,7 +1,7 @@
 import { TICKERS } from "./utils/constants";
-import checkIfOrderIsFulfilled from "./checkIfOrderIsFulfilled";
-import createNewOrder from "./createNewOrder";
-import getTickerBestBidPrice from "./getTickerBestBidPrice";
+import checkIfOrderIsFulfilled from "./services/gemini/checkIfOrderIsFulfilled";
+import createNewOrder from "./services/gemini/createNewOrder";
+import getTickerBestBidPrice from "./services/gemini/getTickerBestBidPrice";
 
 const main = async () => {
   // TODO: use forEach loop to loop through TICKERS
@@ -15,9 +15,9 @@ const main = async () => {
   // order fulfilled
   if (!newOrder.is_live) return;
 
-  // const fulfilledOrder = await checkIfOrderIsFulfilled(newOrder.order_id);
+  const fulfilledOrder = await checkIfOrderIsFulfilled(newOrder.order_id);
 
-  // console.log(fulfilledOrder);
+  console.log(fulfilledOrder);
 };
 
 main();

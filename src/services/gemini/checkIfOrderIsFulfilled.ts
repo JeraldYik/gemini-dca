@@ -1,8 +1,8 @@
-import { OrderStatus } from "../types";
-import { REST_CLIENT } from "./utils/setup";
-import delay from "./utils/delay";
+import { OrderStatus } from "../../../types";
+import { REST_CLIENT } from "../../utils/setup";
+import delay from "../../utils/delay";
 import getOrderStatus from "./getOrderStatus";
-import { logger } from "./utils/logger";
+import { logger } from "../../utils/logger";
 
 const checkIfOrderIsFulfilled = async (
   orderId: string

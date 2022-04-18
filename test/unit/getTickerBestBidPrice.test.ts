@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import getTickerBestBidPrice from "../../src/getTickerBestBidPrice";
+import getTickerBestBidPrice from "../../src/services/gemini/getTickerBestBidPrice";
 
 describe("UNIT TEST: Get Ticker Best Bid Price", async () => {
   const TICKER = "btcsgd";

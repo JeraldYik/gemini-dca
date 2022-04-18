@@ -1,9 +1,9 @@
 import { TICKERS } from "../../src/utils/constants";
-import cancelOrder from "../../src/cancelOrder";
-import createNewOrder from "../../src/createNewOrder";
+import cancelOrder from "../../src/services/gemini/cancelOrder";
+import createNewOrder from "../../src/services/gemini/createNewOrder";
 import { expect } from "chai";
-import getOrderStatus from "../../src/getOrderStatus";
-import getTickerBestBidPrice from "../../src/getTickerBestBidPrice";
+import getOrderStatus from "../../src/services/gemini/getOrderStatus";
+import getTickerBestBidPrice from "../../src/services/gemini/getTickerBestBidPrice";
 
 describe("UNIT TEST: Cancel New Order", async () => {
   const TICKER = "btcsgd";
