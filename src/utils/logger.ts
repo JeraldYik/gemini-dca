@@ -112,8 +112,6 @@ const _logger = createLogger({
       : format.json({ replacer: jsonErrorReplacer })
   ),
   transports: new transports.Console(),
-  // exit program upon error
-  exitOnError: true,
 });
 
 export type LogMeta = Record<string, unknown>;
@@ -142,9 +140,7 @@ export const logger = {
   },
   error: (params: CustomLoggerParams) => {
     const { message, meta, error } = params;
-    if (error) {
-      return _logger.error(message, { meta }, error);
-    }
-    return _logger.error(message, { meta });
+    _logger.error(message, { meta }, error);
+    process.exit(1);
   },
 };
