@@ -4,7 +4,7 @@
   "description": "Personal automation scheduled logic to perform DCA into Gemini CEX",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "source sandbox.env && mocha test/**/*.test.ts --timeout 10000",
     "start": "source sandbox.env && ts-node src/index.ts"
   },
   "repository": {
@@ -18,8 +18,12 @@
   },
   "homepage": "https://github.com/JeraldYik/gemini-dca#readme",
   "devDependencies": {
+    "@types/chai": "^4.3.1",
     "@types/lodash": "^4.14.181",
+    "@types/mocha": "^9.1.0",
     "@types/triple-beam": "^1.3.2",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   },

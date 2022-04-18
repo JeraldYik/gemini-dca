@@ -1,9 +1,5 @@
 import GeminiAPI from "gemini-api";
 
-export type Setup = {
-  restClient: GeminiAPI;
-};
-
 export type Ticker = Record<string, TickerMetadata>;
 
 export type TickerMetadata = {

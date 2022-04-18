@@ -1,11 +1,10 @@
 import { OrderStatus, TickerMetadata } from "../types";
 
-import GeminiAPI from "gemini-api";
 import { ORDER_PRICE_TO_BID_PRICE_RATIO } from "./utils/constants";
+import { REST_CLIENT } from "./utils/setup";
 import { logger } from "./utils/logger";
 
 const createNewOrder = async (
-  restClient: GeminiAPI,
   tickerMetadata: TickerMetadata,
   tickerBestBidPrice: number
 ): Promise<OrderStatus> => {
@@ -13,7 +12,7 @@ const createNewOrder = async (
   const orderAmount = tickerMetadata.dailyFiatAmount / orderPrice;
   let orderStatusData: OrderStatus;
   try {
-    orderStatusData = await restClient.newOrder({
+    orderStatusData = await REST_CLIENT.newOrder({
       symbol: tickerMetadata.symbol,
       amount: orderAmount.toFixed(8),
       price: orderPrice.toFixed(2),

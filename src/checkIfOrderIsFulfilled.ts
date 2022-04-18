@@ -1,11 +1,10 @@
-import GeminiAPI from "gemini-api";
 import { OrderStatus } from "../types";
+import { REST_CLIENT } from "./utils/setup";
 import delay from "./utils/delay";
 import getOrderStatus from "./getOrderStatus";
 import { logger } from "./utils/logger";
 
 const checkIfOrderIsFulfilled = async (
-  restClient: GeminiAPI,
   orderId: string
 ): Promise<OrderStatus | undefined> => {
   logger.info({
@@ -29,14 +28,14 @@ const checkIfOrderIsFulfilled = async (
 
     await delay(30000);
 
-    const orderStatusData = await getOrderStatus(restClient, orderId);
+    const orderStatusData = await getOrderStatus(orderId);
     if (!orderStatusData.is_live) return orderStatusData;
 
     counter++;
   }
 
   try {
-    await restClient.cancelOrder({ order_id: orderId });
+    await REST_CLIENT.cancelOrder({ order_id: orderId });
   } catch (error) {
     logger.error({
       message: "Failed to cancel order",
