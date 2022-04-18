@@ -3,6 +3,7 @@ import bluebird from "bluebird";
 import checkIfOrderIsFulfilled from "./services/gemini/checkIfOrderIsFulfilled";
 import createNewOrder from "./services/gemini/createNewOrder";
 import { differenceInCalendarDays } from "date-fns";
+import { flatten } from "lodash";
 import getTickerBestBidPrice from "./services/gemini/getTickerBestBidPrice";
 import { initialiseGoogleDocument } from "./utils/setup";
 import { logger } from "./utils/logger";
@@ -53,10 +54,7 @@ const main = async () => {
     },
     { concurrency: 1 }
   );
-  const flattenedValues = unflattenedValues.reduce(
-    (acc, arr) => [...acc, ...arr],
-    []
-  );
+  const flattenedValues = flatten(unflattenedValues);
 
   const doc = await initialiseGoogleDocument();
 
