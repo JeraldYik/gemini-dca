@@ -4,11 +4,11 @@ import {
 } from "google-spreadsheet";
 
 import { expect } from "chai";
+import { googleSheetName } from "./../../../src/utils/config";
 import { initialiseGoogleDocument } from "../../../src/utils/setup";
 import updateCells from "../../../src/services/googleSheets/updateCells";
 
 describe("UNIT TEST: Update Cells on Google Sheets", async () => {
-  const SHEET_NAME = "Test";
   const VALUES = [
     new Date().toLocaleDateString(),
     10,
@@ -24,11 +24,11 @@ describe("UNIT TEST: Update Cells on Google Sheets", async () => {
 
   before(async () => {
     doc = await initialiseGoogleDocument();
-    sheet = await doc.sheetsByTitle[SHEET_NAME];
+    sheet = await doc.sheetsByTitle[googleSheetName];
   });
 
   it("Should successfully update cells", async () => {
-    await updateCells(doc, SHEET_NAME, 0, VALUES);
+    await updateCells(doc, googleSheetName, 0, VALUES);
     const row = (
       await sheet.getRows({
         offset: 2,
@@ -42,7 +42,7 @@ describe("UNIT TEST: Update Cells on Google Sheets", async () => {
   });
 
   after(async () => {
-    await sheet.loadCells("A4:H4");
+    await sheet.loadCells("E4:L4");
     const A_ASCII_CODE = 65;
     VALUES.forEach((_, idx) => {
       const letter = String.fromCharCode(A_ASCII_CODE + idx);

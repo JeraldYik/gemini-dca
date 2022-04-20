@@ -28,7 +28,7 @@ const updateCells = async (
     });
   }
 
-  const cellRangeString = `A${targetedRowNumber}:H${targetedRowNumber}`;
+  const cellRangeString = `E${targetedRowNumber}:L${targetedRowNumber}`;
   try {
     await sheet!.loadCells(cellRangeString);
   } catch (error) {

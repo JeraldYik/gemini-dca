@@ -21,5 +21,8 @@ export const googlePrivateKey = process.env.GOOGLE_PRIVATE_KEY!.replace(
 );
 errorIfMissing("GOOGLE_PRIVATE_KEY", googlePrivateKey);
 
+export const googleSheetName = process.env.GOOGLE_SHEET_NAME!;
+errorIfMissing("GOOGLE_SHEET_NAME", googleSheetName);
+
 export const startDate = process.env.START_DATE!;
 errorIfMissing("START_DATE", startDate);
