@@ -1,8 +1,8 @@
 import { OrderStatus, TickerMetadata } from "../../../types";
 
 import { ORDER_PRICE_TO_BID_PRICE_RATIO } from "../../utils/constants";
-import { REST_CLIENT } from "../../utils/setup";
 import { logger } from "../../utils/logger";
+import { restClient } from "../../utils/setup";
 
 const createNewOrder = async (
   tickerMetadata: TickerMetadata,
@@ -12,7 +12,7 @@ const createNewOrder = async (
   const orderAmount = tickerMetadata.dailyFiatAmount / orderPrice;
   let orderStatusData: OrderStatus;
   try {
-    orderStatusData = await REST_CLIENT.newOrder({
+    orderStatusData = await restClient.newOrder({
       symbol: tickerMetadata.symbol,
       amount: orderAmount.toFixed(8),
       price: orderPrice.toFixed(2),

@@ -1,8 +1,8 @@
 import { OrderStatus } from "../../../types";
-import { REST_CLIENT } from "../../utils/setup";
 import delay from "../../utils/delay";
 import getOrderStatus from "./getOrderStatus";
 import { logger } from "../../utils/logger";
+import { restClient } from "../../utils/setup";
 
 const checkIfOrderIsFulfilled = async (
   orderId: string
@@ -35,7 +35,7 @@ const checkIfOrderIsFulfilled = async (
   }
 
   try {
-    await REST_CLIENT.cancelOrder({ order_id: orderId });
+    await restClient.cancelOrder({ order_id: orderId });
   } catch (error) {
     logger.error({
       message: "Failed to cancel order",

@@ -1,11 +1,11 @@
 import { OrderStatus } from "../../../types";
-import { REST_CLIENT } from "./../../utils/setup";
 import { logger } from "./../../utils/logger";
+import { restClient } from "./../../utils/setup";
 
 const getOrderStatus = async (orderId: string): Promise<OrderStatus> => {
   let orderStatusData: OrderStatus;
   try {
-    orderStatusData = await REST_CLIENT.getMyOrderStatus({ order_id: orderId });
+    orderStatusData = await restClient.getMyOrderStatus({ order_id: orderId });
     logger.info({
       message: "Order Status data",
       meta: {

@@ -1,11 +1,11 @@
-import { REST_CLIENT } from "./../../utils/setup";
 import { Ticker } from "gemini-api";
 import { logger } from "./../../utils/logger";
+import { restClient } from "./../../utils/setup";
 
 const getTickerBestBidPrice = async (ticker: string): Promise<number> => {
   let tickerData: Ticker;
   try {
-    tickerData = await REST_CLIENT.getTicker(ticker);
+    tickerData = await restClient.getTicker(ticker);
     logger.info({
       message: "Ticker data",
       meta: {

@@ -1,11 +1,11 @@
 import { OrderStatus } from "../../../types";
-import { REST_CLIENT } from "../../utils/setup";
 import { logger } from "../../utils/logger";
+import { restClient } from "../../utils/setup";
 
 const cancelOrder = async (orderId: string): Promise<OrderStatus> => {
   let orderStatusData: OrderStatus;
   try {
-    orderStatusData = await REST_CLIENT.cancelOrder({ order_id: orderId });
+    orderStatusData = await restClient.cancelOrder({ order_id: orderId });
     logger.info({
       message: "Cancel order operation successful",
       meta: {
