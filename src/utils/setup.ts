@@ -1,4 +1,7 @@
 import {
+  dbName,
+  dbPassword,
+  dbUsername,
   geminiApiKey,
   geminiApiSecret,
   googlePrivateKey,
@@ -9,8 +12,9 @@ import {
 
 import GeminiAPI from "gemini-api";
 import { GoogleSpreadsheet } from "google-spreadsheet";
+import { Sequelize } from "sequelize";
 
-export const REST_CLIENT = new GeminiAPI({
+export const restClient = new GeminiAPI({
   key: geminiApiKey,
   secret: geminiApiSecret,
   sandbox: isSandboxEnv,
@@ -26,3 +30,11 @@ export const initialiseGoogleDocument = async () => {
 
   return doc;
 };
+
+export const sequelize = new Sequelize({
+  database: dbName,
+  username: dbUsername,
+  password: dbPassword,
+  dialect: "postgres",
+  timezone: "+08:00",
+});

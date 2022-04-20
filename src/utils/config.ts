@@ -1,6 +1,6 @@
 import errorIfMissing from "./errorIfMissing";
 
-export const isSandboxEnv = process.env.IS_SANDBOX_ENV === "true";
+export const isSandboxEnv = process.env.NODE_ENV !== "production";
 
 export const geminiApiKey = process.env.GEMINI_API_KEY!;
 errorIfMissing("GEMINI_API_KEY", geminiApiKey);
@@ -26,3 +26,15 @@ errorIfMissing("GOOGLE_SHEET_NAME", googleSheetName);
 
 export const startDate = process.env.START_DATE!;
 errorIfMissing("START_DATE", startDate);
+
+export const dbUsername = process.env.DB_USERNAME!;
+errorIfMissing("DB_USERNAME", dbUsername);
+
+export const dbPassword = process.env.DB_PASSWORD!;
+errorIfMissing("DB_PASSWORD", dbPassword);
+
+export const dbName = process.env.DB_NAME!;
+errorIfMissing("DB_NAME", dbName);
+
+export const dbHost = process.env.DB_HOST!;
+errorIfMissing("DB_HOST", dbHost);
