@@ -5,7 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "test": "source sandbox.env && mocha test/**/*.test.ts --timeout 10000",
-    "start": "source sandbox.env && ts-node src/index.ts"
+    "dev": "source sandbox.env && ts-node src/index.ts",
+    "start": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
