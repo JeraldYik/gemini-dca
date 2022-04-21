@@ -6,7 +6,7 @@
   "scripts": {
     "test": "source dev.env && mocha test/**/*.test.ts --timeout 10000",
     "dev": "source dev.env && ts-node src/index.ts",
-    "start": "ts-node src/index.ts"
+    "schedule": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
