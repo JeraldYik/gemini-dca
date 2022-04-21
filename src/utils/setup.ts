@@ -9,11 +9,13 @@ import {
   googleServiceAccountEmail,
   googleSheetId,
   isSandboxEnv,
+  raygunApiKey,
 } from "./config";
 
 import GeminiAPI from "gemini-api";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { Sequelize } from "sequelize";
+import raygun from "raygun";
 
 export const restClient = new GeminiAPI({
   key: geminiApiKey,
@@ -39,4 +41,10 @@ export const sequelize = new Sequelize({
   host: dbHost,
   dialect: "postgres",
   timezone: "+08:00",
+});
+
+export const raygunClient = new raygun.Client().init({
+  apiKey: raygunApiKey,
+  reportUncaughtExceptions: true,
+  batch: true,
 });

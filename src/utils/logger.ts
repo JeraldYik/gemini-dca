@@ -3,6 +3,7 @@ import { createLogger, format, transports } from "winston";
 import { SPLAT } from "triple-beam";
 import { inspect } from "util";
 import { isSandboxEnv } from "./config";
+import { raygunClient } from "./setup";
 
 /**
  * Hunts for errors in the given object passed to the logger.
@@ -141,6 +142,7 @@ export const logger = {
   error: (params: CustomLoggerParams) => {
     const { message, meta, error } = params;
     _logger.error(message, { meta }, error);
+    raygunClient.send(message, error);
     process.exit(1);
   },
 };

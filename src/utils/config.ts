@@ -38,3 +38,6 @@ errorIfMissing("DB_NAME", dbName);
 
 export const dbHost = process.env.DB_HOST!;
 errorIfMissing("DB_HOST", dbHost);
+
+export const raygunApiKey = process.env.RAYGUN_API_KEY!;
+errorIfMissing("RAYGUN_API_KEY", raygunApiKey);
