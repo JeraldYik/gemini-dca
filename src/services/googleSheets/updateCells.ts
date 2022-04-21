@@ -41,15 +41,21 @@ const updateCells = async (
     });
   }
 
-  const A_ASCII_CODE = 65;
+  const E_ASCII_CODE = 69;
   values.forEach((value, idx) => {
-    const letter = String.fromCharCode(A_ASCII_CODE + idx);
+    const letter = String.fromCharCode(E_ASCII_CODE + idx);
     const cell = sheet.getCellByA1(`${letter}${targetedRowNumber}`);
     cell.value = value;
   });
 
   try {
     await sheet!.saveUpdatedCells();
+    logger.info({
+      message: "Successfully updated cells",
+      meta: {
+        cellRangeString,
+      },
+    });
   } catch (error) {
     logger.error({
       message: "Error while updating cells",
@@ -59,13 +65,6 @@ const updateCells = async (
       error,
     });
   }
-
-  logger.info({
-    message: "Successfully updated cells",
-    meta: {
-      cellRangeString,
-    },
-  });
 };
 
 export default updateCells;
