@@ -13,6 +13,7 @@ import { logger } from "./utils/logger";
 import updateCells from "./services/googleSheets/updateCells";
 
 const main = async () => {
+  const doc = await initialiseGoogleDocument();
   const todayDate = new Date().toLocaleDateString();
   const unflattenedTransactionValues = await bluebird.map(
     Object.entries(TICKERS),
@@ -61,8 +62,6 @@ const main = async () => {
     { concurrency: 1 }
   );
   const flattenedTransactionValues = flatten(unflattenedTransactionValues);
-
-  const doc = await initialiseGoogleDocument();
 
   const splitStartDate = startDate.split("/").map((d) => parseInt(d));
   const differenceInDays = differenceInCalendarDays(
