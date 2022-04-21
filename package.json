@@ -4,8 +4,8 @@
   "description": "Personal automation scheduled logic to perform DCA into Gemini CEX",
   "main": "index.ts",
   "scripts": {
-    "test": "source sandbox.env && mocha test/**/*.test.ts --timeout 10000",
-    "dev": "source sandbox.env && ts-node src/index.ts",
+    "test": "source dev.env && mocha test/**/*.test.ts --timeout 10000",
+    "dev": "source dev.env && ts-node src/index.ts",
     "start": "ts-node src/index.ts"
   },
   "repository": {

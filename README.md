@@ -6,8 +6,8 @@ Personal automation scheduled logic to perform DCA into Gemini CEX
 
 ## Setup
 
-- [ ] Populate `sandbox.env` or `production.env` (depending on environment)
+- [ ] Populate `dev.env`/`staging.env`/`production.env` (depending on environment)
 - [ ] Migrate table locally
   - [ ] Run docker and run command `docker-compose up`
-  - [ ] Run `source sandbox.env && npx sequelize-cli db:migrate`
+  - [ ] Run `source dev.env && npx sequelize-cli db:migrate`
 - (If you want to remove the entire database functional group, comment and remove the relevant lines of code/files)
