@@ -1,23 +1,36 @@
-import { DataTypes, ModelDefined } from "sequelize";
+import { DataTypes, Model, ModelDefined } from "sequelize";
 
 import { sequelize } from "../../../utils/setup";
 import { startOfDay } from "date-fns";
 
-type OrderAttributes = {
+export type OrderAttributes = {
+  ticker: string;
   createdForDay: Date;
   fiatDepositInSgd: number;
   pricePerCoinInSgd: number;
   coinAmount: number;
 };
 
-type OrderCreationAttributes = Omit<OrderAttributes, "createdForDay">;
+export type OrderModel = Model<OrderAttributes, OrderAttributes>;
 
-export const Order: ModelDefined<OrderAttributes, OrderCreationAttributes> =
-  sequelize.define("Order", {
+type OrderModelDefined = ModelDefined<OrderAttributes, OrderAttributes>;
+
+const Order: OrderModelDefined = sequelize.define(
+  "Order",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    ticker: {
+      type: DataTypes.STRING, // could've been an enum, however there's no need for a migration in order to support future tickers
+      allowNull: false,
+    },
     createdForDay: {
       type: DataTypes.DATE,
       allowNull: false,
-      primaryKey: true,
       defaultValue: startOfDay(new Date()),
     },
     fiatDepositInSgd: {
@@ -32,4 +45,15 @@ export const Order: ModelDefined<OrderAttributes, OrderCreationAttributes> =
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-  });
+  },
+  {
+    indexes: [
+      {
+        unique: true,
+        fields: ["ticker", "createdForDay"],
+      },
+    ],
+  }
+);
+
+export default Order;
