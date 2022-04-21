@@ -10,7 +10,7 @@ const getOrderStatus = async (orderId: string): Promise<OrderStatus> => {
       message: "Order Status data",
       meta: {
         orderId,
-        orderStatusData,
+        ...orderStatusData,
       },
     });
   } catch (error) {

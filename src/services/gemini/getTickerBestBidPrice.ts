@@ -10,7 +10,7 @@ const getTickerBestBidPrice = async (ticker: string): Promise<number> => {
       message: "Ticker data",
       meta: {
         ticker,
-        tickerData,
+        ...tickerData,
       },
     });
   } catch (error) {

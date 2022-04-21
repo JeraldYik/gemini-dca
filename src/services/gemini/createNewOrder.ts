@@ -23,7 +23,7 @@ const createNewOrder = async (
       message: "Created Order Status data",
       meta: {
         symbol: tickerMetadata.symbol,
-        orderStatusData,
+        ...orderStatusData,
       },
     });
   } catch (error) {
