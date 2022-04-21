@@ -1,5 +1,5 @@
 import { differenceInCalendarDays, startOfDay } from "date-fns";
-import { googleSheetName, startDate } from "./utils/config";
+import { googleSheetName, isSandboxEnv, startDate } from "./utils/config";
 
 import { TICKERS } from "./utils/constants";
 import bluebird from "bluebird";
@@ -18,6 +18,10 @@ const main = async () => {
     Object.entries(TICKERS),
     async (coinInfo) => {
       const tickerMetadata = coinInfo[1];
+      // Assume that Gemini logic is well-tested with unit tests, hence Gemini portion is skipped for sandbox environment, as order books is sparsely populated
+      if (isSandboxEnv) {
+        return [todayDate, tickerMetadata.dailyFiatAmount, 1000, 1];
+      }
       const tickerBestBidPrice = await getTickerBestBidPrice(
         tickerMetadata.symbol
       );
