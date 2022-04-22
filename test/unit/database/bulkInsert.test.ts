@@ -35,11 +35,13 @@ describe("UNIT TEST: Bulk Insert into database", async () => {
     const btcSgdRow = await Order.findOne({
       where: {
         ticker: "btcsgd",
+        createdForDay: startOfDay(new Date()),
       },
     });
     const ethSgdRow = await Order.findOne({
       where: {
         ticker: "ethsgd",
+        createdForDay: startOfDay(new Date()),
       },
     });
     expect(btcSgdRow).to.exist;

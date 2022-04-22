@@ -35,17 +35,22 @@ describe("UNIT TEST: Update Cells on Google Sheets", async () => {
         limit: 1,
       })
     )[0];
+    console.log(row._rawData);
 
     row._rawData.forEach((cell: string, idx: number) => {
-      expect(idx % 4 === 0 ? cell : parseFloat(cell)).to.be.eql(VALUES[idx]);
+      // skip the first 4 cells
+      if (idx < 4) return;
+      expect(idx % 4 === 0 ? cell : parseFloat(cell)).to.be.eql(
+        VALUES[idx - 4]
+      );
     });
   });
 
   after(async () => {
     await sheet.loadCells("E4:L4");
-    const A_ASCII_CODE = 65;
+    const E_ASCII_CODE = 69;
     VALUES.forEach((_, idx) => {
-      const letter = String.fromCharCode(A_ASCII_CODE + idx);
+      const letter = String.fromCharCode(E_ASCII_CODE + idx);
       const cell = sheet.getCellByA1(`${letter}4`);
       cell.value = "";
     });
