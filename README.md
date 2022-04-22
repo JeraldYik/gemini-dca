@@ -11,3 +11,5 @@ Personal automation scheduled logic to perform DCA into Gemini CEX
   - [ ] Run docker and run command `docker-compose up`
   - [ ] Run `source dev.env && npx sequelize-cli db:migrate`
 - (If you want to remove the entire database functional group, comment and remove the relevant lines of code/files)
+
+Note: If you are hosting on Heroku, it may be helpful to run `heroku scale web=0 --remote <remote-env>` to prevent `npm start` to be called on every deploy.
