@@ -14,7 +14,9 @@ import updateCells from "./services/googleSheets/updateCells";
 
 const main = async () => {
   const doc = await initialiseGoogleDocument();
-  const todayDate = new Date().toLocaleDateString();
+  const todayDate = new Date().toLocaleDateString("en-SG", {
+    timeZone: "Asia/Singapore",
+  });
   const unflattenedTransactionValues = await bluebird.map(
     Object.entries(TICKERS),
     async (coinInfo) => {
