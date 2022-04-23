@@ -61,17 +61,23 @@ export const sentryTransaction = Sentry.startTransaction({
   name: "sentry-error-handler",
 });
 
-export const sentryCaptureException = (
+export const sentryCaptureExceptionAndExit = (
   message: string,
   meta: LogMeta,
   error: unknown
 ) => {
+  const eventId = Sentry.captureException({
+    message,
+    meta: JSON.stringify(meta),
+    error: JSON.stringify(error),
+  });
   logger.info({
-    message: "Sending error to Sentry",
+    message: "Sentry event id",
     meta: {
-      ...meta,
-      error,
+      eventId,
     },
   });
-  Sentry.captureException({ message, meta, error });
+  sentryTransaction.finish();
+  // https://docs.sentry.io/platforms/node/configuration/draining/
+  Sentry.close(2000).then(() => process.exit(1));
 };

@@ -100,8 +100,6 @@ const main = async () => {
   );
 
   await bulkInsertRowIntoDb(bulkCreateTransactionRow);
-
-  sentryTransaction.finish();
 };
 
 main();
