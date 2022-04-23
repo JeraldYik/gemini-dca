@@ -52,9 +52,10 @@ const main = async () => {
         ];
       }
 
-      const fulfilledOrder = (await checkIfOrderIsFulfilled(
-        newOrder.order_id
-      ))!;
+      const fulfilledOrder = (await checkIfOrderIsFulfilled({
+        orderId: newOrder.order_id,
+        tickerSymbol: tickerMetadata.symbol,
+      }))!;
 
       logger.info({
         message: "Order fulfilled",

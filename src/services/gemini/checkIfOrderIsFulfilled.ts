@@ -4,9 +4,13 @@ import getOrderStatus from "./getOrderStatus";
 import { logger } from "../../utils/logger";
 import { restClient } from "../../setup/gemini";
 
-const checkIfOrderIsFulfilled = async (
-  orderId: string
-): Promise<OrderStatus | undefined> => {
+const checkIfOrderIsFulfilled = async ({
+  orderId,
+  tickerSymbol,
+}: {
+  orderId: string;
+  tickerSymbol: string;
+}): Promise<OrderStatus | undefined> => {
   logger.info({
     message:
       "Order is not cancelled. Running loop for an hour to check for fulfillment of order",
@@ -23,6 +27,7 @@ const checkIfOrderIsFulfilled = async (
       meta: {
         orderId,
         counter,
+        tickerSymbol,
       },
     });
 
