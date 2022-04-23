@@ -1,3 +1,8 @@
+import "@sentry/tracing";
+
+import * as Sentry from "@sentry/node";
+
+import { LogMeta, logger } from "./logger";
 import {
   dbHost,
   dbName,
@@ -9,13 +14,13 @@ import {
   googleServiceAccountEmail,
   googleSheetId,
   isSandboxEnv,
-  raygunApiKey,
+  nodeEnv,
+  sentryDsn,
 } from "./config";
 
 import GeminiAPI from "gemini-api";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { Sequelize } from "sequelize";
-import raygun from "raygun";
 
 export const restClient = new GeminiAPI({
   key: geminiApiKey,
@@ -43,8 +48,30 @@ export const sequelize = new Sequelize({
   timezone: "+08:00",
 });
 
-export const raygunClient = new raygun.Client().init({
-  apiKey: raygunApiKey,
-  reportUncaughtExceptions: true,
-  batch: true,
+Sentry.init({
+  dsn: sentryDsn,
+  sampleRate: 1.0,
+  tracesSampleRate: 1.0,
+  debug: true,
+  environment: nodeEnv,
 });
+
+export const sentryTransaction = Sentry.startTransaction({
+  op: "main",
+  name: "sentry-error-handler",
+});
+
+export const sentryCaptureException = (
+  message: string,
+  meta: LogMeta,
+  error: unknown
+) => {
+  logger.info({
+    message: "Sending error to Sentry",
+    meta: {
+      ...meta,
+      error,
+    },
+  });
+  Sentry.captureException({ message, meta, error });
+};

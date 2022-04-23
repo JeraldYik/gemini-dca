@@ -1,5 +1,8 @@
 import errorIfMissing from "./errorIfMissing";
 
+export const nodeEnv = process.env.NODE_ENV!;
+errorIfMissing("NODE_ENV", nodeEnv);
+
 export const isSandboxEnv = process.env.NODE_ENV !== "production";
 
 export const geminiApiKey = process.env.GEMINI_API_KEY!;
@@ -39,5 +42,5 @@ errorIfMissing("DB_NAME", dbName);
 export const dbHost = process.env.DB_HOST!;
 errorIfMissing("DB_HOST", dbHost);
 
-export const raygunApiKey = process.env.RAYGUN_API_KEY!;
-errorIfMissing("RAYGUN_API_KEY", raygunApiKey);
+export const sentryDsn = process.env.SENTRY_DSN!;
+errorIfMissing("SENTRY_DSN", sentryDsn);

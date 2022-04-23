@@ -1,9 +1,9 @@
 import { createLogger, format, transports } from "winston";
+import { isSandboxEnv, nodeEnv } from "./config";
+import { sentryCaptureException, sentryTransaction } from "./setup";
 
 import { SPLAT } from "triple-beam";
 import { inspect } from "util";
-import { isSandboxEnv } from "./config";
-import { raygunClient } from "./setup";
 
 /**
  * Hunts for errors in the given object passed to the logger.
@@ -142,7 +142,13 @@ export const logger = {
   error: (params: CustomLoggerParams) => {
     const { message, meta, error } = params;
     _logger.error(message, { meta }, error);
-    raygunClient.send(message, error);
+
+    // send crash alert to Sentry for email prompt
+    // if (nodeEnv !== "dev") {
+    sentryCaptureException(message, meta, error);
+    sentryTransaction.finish();
+    // }
+
     process.exit(1);
   },
 };
