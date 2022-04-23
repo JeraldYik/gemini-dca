@@ -3,7 +3,7 @@ import { isSandboxEnv, nodeEnv } from "./config";
 
 import { SPLAT } from "triple-beam";
 import { inspect } from "util";
-import { sentryCaptureExceptionAndExit } from "./setup";
+import { sentryCaptureExceptionAndExit } from "../setup/sentry";
 
 /**
  * Hunts for errors in the given object passed to the logger.

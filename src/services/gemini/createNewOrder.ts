@@ -2,7 +2,7 @@ import { OrderStatus, TickerMetadata } from "../../../types";
 
 import { ORDER_PRICE_TO_BID_PRICE_RATIO } from "../../utils/constants";
 import { logger } from "../../utils/logger";
-import { restClient } from "../../utils/setup";
+import { restClient } from "../../setup/gemini";
 
 const createNewOrder = async (
   tickerMetadata: TickerMetadata,

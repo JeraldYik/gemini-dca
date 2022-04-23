@@ -5,7 +5,7 @@ import {
 
 import { expect } from "chai";
 import { googleSheetName } from "./../../../src/utils/config";
-import { initialiseGoogleDocument } from "../../../src/utils/setup";
+import { initialiseGoogleDocument } from "../../../src/setup/googleSheets";
 import updateCells from "../../../src/services/googleSheets/updateCells";
 
 describe("UNIT TEST: Update Cells on Google Sheets", async () => {

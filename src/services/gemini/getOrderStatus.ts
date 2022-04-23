@@ -1,6 +1,6 @@
 import { OrderStatus } from "../../../types";
 import { logger } from "./../../utils/logger";
-import { restClient } from "./../../utils/setup";
+import { restClient } from "../../setup/gemini";
 
 const getOrderStatus = async (orderId: string): Promise<OrderStatus> => {
   let orderStatusData: OrderStatus;

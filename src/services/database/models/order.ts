@@ -1,6 +1,6 @@
 import { DataTypes, Model, ModelDefined } from "sequelize";
 
-import { sequelize } from "../../../utils/setup";
+import { sequelize } from "../../../setup/database";
 import { startOfDay } from "date-fns";
 
 export type OrderAttributes = {

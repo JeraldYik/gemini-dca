@@ -5,7 +5,7 @@ import Order, {
 import { Sequelize } from "sequelize";
 import bulkInsertRowIntoDb from "../../../src/services/database/bulkInsertRowIntoDb";
 import { expect } from "chai";
-import { sequelize } from "./../../../src/utils/setup";
+import { sequelize } from "./../../../src/setup/database";
 import { startOfDay } from "date-fns";
 
 describe("UNIT TEST: Bulk Insert into database", async () => {

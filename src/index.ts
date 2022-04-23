@@ -1,6 +1,5 @@
 import { differenceInCalendarDays, startOfDay } from "date-fns";
 import { googleSheetName, isSandboxEnv, startDate } from "./utils/config";
-import { initialiseGoogleDocument, sentryTransaction } from "./utils/setup";
 
 import { TICKERS } from "./utils/constants";
 import bluebird from "bluebird";
@@ -9,6 +8,7 @@ import checkIfOrderIsFulfilled from "./services/gemini/checkIfOrderIsFulfilled";
 import createNewOrder from "./services/gemini/createNewOrder";
 import { flatten } from "lodash";
 import getTickerBestBidPrice from "./services/gemini/getTickerBestBidPrice";
+import { initialiseGoogleDocument } from "./setup/googleSheets";
 import { logger } from "./utils/logger";
 import updateCells from "./services/googleSheets/updateCells";
 

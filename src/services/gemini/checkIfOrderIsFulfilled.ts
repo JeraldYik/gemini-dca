@@ -2,7 +2,7 @@ import { OrderStatus } from "../../../types";
 import delay from "../../utils/delay";
 import getOrderStatus from "./getOrderStatus";
 import { logger } from "../../utils/logger";
-import { restClient } from "../../utils/setup";
+import { restClient } from "../../setup/gemini";
 
 const checkIfOrderIsFulfilled = async (
   orderId: string
