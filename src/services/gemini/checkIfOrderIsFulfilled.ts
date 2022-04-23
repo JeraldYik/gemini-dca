@@ -19,7 +19,7 @@ const checkIfOrderIsFulfilled = async (
   let counter = 1;
   while (counter <= MAX_COUNTER) {
     logger.info({
-      message: "Delaying 30s",
+      message: "Delaying 10s",
       meta: {
         orderId,
         counter,
