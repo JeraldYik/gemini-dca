@@ -27,6 +27,9 @@ errorIfMissing("GOOGLE_PRIVATE_KEY", googlePrivateKey);
 export const googleSheetName = process.env.GOOGLE_SHEET_NAME!;
 errorIfMissing("GOOGLE_SHEET_NAME", googleSheetName);
 
+export const startRow = parseInt(process.env.START_ROW!);
+errorIfMissing("START_ROW", startRow.toString());
+
 export const startDate = process.env.START_DATE!;
 errorIfMissing("START_DATE", startDate);
 

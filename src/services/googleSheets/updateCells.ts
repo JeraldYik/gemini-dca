@@ -4,6 +4,7 @@ import {
 } from "google-spreadsheet";
 
 import { logger } from "../../utils/logger";
+import { startRow } from "./../../utils/config";
 
 const updateCells = async (
   doc: GoogleSpreadsheet,
@@ -11,9 +12,7 @@ const updateCells = async (
   differenceInDays: number,
   values: (string | number)[]
 ) => {
-  // DO NOT TOUCH THIS
-  const FIRST_ROW_NUMBER = 4;
-  const targetedRowNumber = FIRST_ROW_NUMBER + differenceInDays;
+  const targetedRowNumber = startRow + differenceInDays;
 
   let sheet: GoogleSpreadsheetWorksheet;
   try {

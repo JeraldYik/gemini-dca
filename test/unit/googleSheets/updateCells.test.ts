@@ -2,9 +2,9 @@ import {
   GoogleSpreadsheet,
   GoogleSpreadsheetWorksheet,
 } from "google-spreadsheet";
+import { googleSheetName, startRow } from "./../../../src/utils/config";
 
 import { expect } from "chai";
-import { googleSheetName } from "./../../../src/utils/config";
 import { initialiseGoogleDocument } from "../../../src/setup/googleSheets";
 import updateCells from "../../../src/services/googleSheets/updateCells";
 
@@ -51,7 +51,7 @@ describe("UNIT TEST: Update Cells on Google Sheets", async () => {
     const E_ASCII_CODE = 69;
     VALUES.forEach((_, idx) => {
       const letter = String.fromCharCode(E_ASCII_CODE + idx);
-      const cell = sheet.getCellByA1(`${letter}4`);
+      const cell = sheet.getCellByA1(`${letter}${startRow}`);
       cell.value = "";
     });
     await sheet.saveUpdatedCells();
