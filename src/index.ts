@@ -38,15 +38,23 @@ const main = async () => {
       }
 
       // order fulfilled
-      if (!newOrder.is_live)
+      if (!newOrder.is_live) {
+        const actualFiatDeposit = (
+          parseFloat(newOrder.avg_execution_price) *
+          parseFloat(newOrder.executed_amount)
+        ).toString();
+
         return [
           todayDate,
-          tickerMetadata.dailyFiatAmount,
+          actualFiatDeposit,
           newOrder.avg_execution_price,
           newOrder.executed_amount,
         ];
+      }
 
-      const fulfilledOrder = await checkIfOrderIsFulfilled(newOrder.order_id);
+      const fulfilledOrder = (await checkIfOrderIsFulfilled(
+        newOrder.order_id
+      ))!;
 
       logger.info({
         message: "Order fulfilled",
@@ -54,9 +62,14 @@ const main = async () => {
           ...fulfilledOrder,
         },
       });
+      const actualFiatDeposit = (
+        parseFloat(fulfilledOrder.avg_execution_price) *
+        parseFloat(fulfilledOrder.executed_amount)
+      ).toString();
+
       return [
         todayDate,
-        tickerMetadata.dailyFiatAmount,
+        actualFiatDeposit,
         fulfilledOrder!.avg_execution_price,
         fulfilledOrder!.executed_amount,
       ];
