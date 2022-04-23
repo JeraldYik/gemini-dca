@@ -14,7 +14,11 @@ const createNewOrder = async (
   try {
     orderStatusData = await restClient.newOrder({
       symbol: tickerMetadata.symbol,
-      amount: orderAmount.toFixed(8),
+      /**
+       * https://docs.gemini.com/rest-api/?python#symbols-and-minimums
+       * Between btcsgd & ethsgd, ethsgd has the larger tick size of 1e-6
+       */
+      amount: orderAmount.toFixed(6),
       price: orderPrice.toFixed(2),
       side: "buy",
       options: ["maker-or-cancel"],
