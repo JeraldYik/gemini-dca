@@ -1,5 +1,3 @@
-import GeminiAPI from "gemini-api";
-
 export type Ticker = Record<string, TickerMetadata>;
 
 export type TickerMetadata = {
