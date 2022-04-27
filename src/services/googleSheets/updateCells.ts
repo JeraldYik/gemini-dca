@@ -2,7 +2,6 @@ import {
   GoogleSpreadsheet,
   GoogleSpreadsheetWorksheet,
 } from "google-spreadsheet";
-
 import { logger } from "../../utils/logger";
 import { startRow } from "./../../utils/config";
 
@@ -53,6 +52,7 @@ const updateCells = async (
       message: "Successfully updated cells",
       meta: {
         cellRangeString,
+        values,
       },
     });
   } catch (error) {
