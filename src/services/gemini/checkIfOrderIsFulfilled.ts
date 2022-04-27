@@ -1,4 +1,5 @@
 import { OrderStatus } from "../../../types";
+import counterToTimeElapsed from "../../utils/counterToTimeElapsed";
 import delay from "../../utils/delay";
 import getOrderStatus from "./getOrderStatus";
 import { logger } from "../../utils/logger";
@@ -13,20 +14,21 @@ const checkIfOrderIsFulfilled = async ({
 }): Promise<OrderStatus | undefined> => {
   logger.info({
     message:
-      "Order is not cancelled. Running loop for an hour to check for fulfillment of order",
+      "Order is not cancelled. Running loop for 2 hours to check for fulfillment of order",
     meta: {
       orderId,
     },
   });
 
-  const MAX_COUNTER = 360; // 60 minutes/10 seconds
-  let counter = 1;
-  while (counter <= MAX_COUNTER) {
+  const MAX_COUNTER = 720; // 2 hours / 10 seconds
+  let counter = 0;
+  while (counter < MAX_COUNTER) {
+    const timeElapsed = counterToTimeElapsed(counter);
     logger.info({
       message: "Delaying 10s",
       meta: {
         orderId,
-        counter,
+        timeElapsed,
         tickerSymbol,
       },
     });
@@ -52,7 +54,7 @@ const checkIfOrderIsFulfilled = async ({
   }
 
   logger.error({
-    message: "Order not fulfilled within 4 minutes",
+    message: "Order not fulfilled within 2 hours",
     meta: {
       orderId,
     },
