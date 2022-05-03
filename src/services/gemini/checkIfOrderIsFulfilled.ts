@@ -14,18 +14,18 @@ const checkIfOrderIsFulfilled = async ({
 }): Promise<OrderStatus | undefined> => {
   logger.info({
     message:
-      "Order is not cancelled. Running loop for 2 hours to check for fulfillment of order",
+      "Order is not cancelled. Running loop for 6 hours to check for fulfillment of order",
     meta: {
       orderId,
     },
   });
 
-  const MAX_COUNTER = 720; // 2 hours / 10 seconds
+  const MAX_COUNTER = 720; // 6 hours / 30 seconds
   let counter = 0;
   while (counter < MAX_COUNTER) {
-    const timeElapsed = counterToTimeElapsed(counter);
+    const timeElapsed = counterToTimeElapsed(counter, 30);
     logger.info({
-      message: "Delaying 10s",
+      message: "Delaying 30s",
       meta: {
         orderId,
         timeElapsed,
@@ -33,7 +33,7 @@ const checkIfOrderIsFulfilled = async ({
       },
     });
 
-    await delay(10000);
+    await delay(30000);
 
     const orderStatusData = await getOrderStatus(orderId);
     if (!orderStatusData.is_live) return orderStatusData;
@@ -54,7 +54,7 @@ const checkIfOrderIsFulfilled = async ({
   }
 
   logger.error({
-    message: "Order not fulfilled within 2 hours",
+    message: "Order not fulfilled within 6 hours",
     meta: {
       orderId,
     },
