@@ -2,6 +2,7 @@ import {
   GoogleSpreadsheet,
   GoogleSpreadsheetWorksheet,
 } from "google-spreadsheet";
+
 import { logger } from "../../utils/logger";
 import { startRow } from "./../../utils/config";
 
@@ -40,6 +41,12 @@ const updateCells = async (
   }
 
   const E_ASCII_CODE = 69;
+  logger.info({
+    message: "temporary logger for updating google sheets values",
+    meta: {
+      values,
+    },
+  });
   values.forEach((value, idx) => {
     const letter = String.fromCharCode(E_ASCII_CODE + idx);
     const cell = sheet.getCellByA1(`${letter}${targetedRowNumber}`);
