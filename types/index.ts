@@ -3,6 +3,7 @@ export type Ticker = Record<string, TickerMetadata>;
 export type TickerMetadata = {
   symbol: string;
   dailyFiatAmount: number;
+  googleSheetCellRange: string;
 };
 
 export type OrderStatus = {

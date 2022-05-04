@@ -6,10 +6,12 @@ export const TICKERS: Ticker = {
   BTC: {
     symbol: "btcsgd",
     dailyFiatAmount: 10,
+    googleSheetCellRange: "E*:H*",
   },
   ETH: {
     symbol: "ethsgd",
     dailyFiatAmount: 20,
+    googleSheetCellRange: "I*:L*",
   },
 } as const;
 
