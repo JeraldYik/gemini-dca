@@ -35,7 +35,6 @@ describe("UNIT TEST: Update Cells on Google Sheets", async () => {
         limit: 1,
       })
     )[0];
-    console.log(row._rawData);
 
     row._rawData.forEach((cell: string, idx: number) => {
       // skip the first 4 cells
