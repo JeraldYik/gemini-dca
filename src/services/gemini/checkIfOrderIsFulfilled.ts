@@ -8,9 +8,11 @@ import { restClient } from "../../setup/gemini";
 const checkIfOrderIsFulfilled = async ({
   orderId,
   tickerSymbol,
+  externalLoopCounter,
 }: {
   orderId: string;
   tickerSymbol: string;
+  externalLoopCounter: number;
 }): Promise<OrderStatus | undefined> => {
   logger.info({
     message:
@@ -20,10 +22,16 @@ const checkIfOrderIsFulfilled = async ({
     },
   });
 
-  const MAX_COUNTER = 720; // 6 hours / 30 seconds
+  // do note that this method would be ran 6 times, each time 1 hour long
+  const MAX_COUNTER = 120; // 1 hour / 30 seconds
   let counter = 0;
   while (counter < MAX_COUNTER) {
-    const timeElapsed = counterToTimeElapsed(counter, 30);
+    const timeElapsed = counterToTimeElapsed(
+      externalLoopCounter,
+      60,
+      counter,
+      30
+    );
     logger.info({
       message: "Delaying 30s",
       meta: {
@@ -52,13 +60,6 @@ const checkIfOrderIsFulfilled = async ({
       error,
     });
   }
-
-  logger.error({
-    message: "Order not fulfilled within 6 hours",
-    meta: {
-      orderId,
-    },
-  });
 };
 
 export default checkIfOrderIsFulfilled;

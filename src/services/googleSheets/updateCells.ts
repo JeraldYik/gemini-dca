@@ -4,16 +4,13 @@ import {
 } from "google-spreadsheet";
 
 import { logger } from "../../utils/logger";
-import { startRow } from "./../../utils/config";
 
 const updateCells = async (
   doc: GoogleSpreadsheet,
   sheetName: string,
-  differenceInDays: number,
+  cellRange: string,
   values: (string | number)[]
 ) => {
-  const targetedRowNumber = startRow + differenceInDays;
-
   let sheet: GoogleSpreadsheetWorksheet;
   try {
     sheet = await doc.sheetsByTitle[sheetName];
@@ -27,28 +24,28 @@ const updateCells = async (
     });
   }
 
-  const cellRangeString = `E${targetedRowNumber}:L${targetedRowNumber}`;
   try {
-    await sheet!.loadCells(cellRangeString);
+    await sheet!.loadCells(cellRange);
   } catch (error) {
     logger.error({
       message: "Error while loading cells",
       meta: {
-        cellRangeString,
+        cellRange,
       },
       error,
     });
   }
 
-  const E_ASCII_CODE = 69;
   logger.info({
     message: "temporary logger for updating google sheets values",
     meta: {
       values,
     },
   });
+  const STARTING_LETTER_ASCII_CODE = cellRange[0].charCodeAt(0);
+  const targetedRowNumber = cellRange[1];
   values.forEach((value, idx) => {
-    const letter = String.fromCharCode(E_ASCII_CODE + idx);
+    const letter = String.fromCharCode(STARTING_LETTER_ASCII_CODE + idx);
     const cell = sheet.getCellByA1(`${letter}${targetedRowNumber}`);
     cell.value = value;
   });
@@ -58,7 +55,7 @@ const updateCells = async (
     logger.info({
       message: "Successfully updated cells",
       meta: {
-        cellRangeString,
+        cellRange,
         values,
       },
     });
@@ -66,7 +63,7 @@ const updateCells = async (
     logger.error({
       message: "Error while updating cells",
       meta: {
-        cellRangeString,
+        cellRange,
       },
       error,
     });
