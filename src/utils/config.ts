@@ -1,4 +1,5 @@
 import errorIfMissing from "./errorIfMissing";
+import transformArrayStringToArray from "./transformArrayStringToArray";
 
 export const nodeEnv = process.env.NODE_ENV!;
 errorIfMissing("NODE_ENV", nodeEnv);
@@ -27,12 +28,13 @@ errorIfMissing("GOOGLE_PRIVATE_KEY", googlePrivateKey);
 export const googleSheetName = process.env.GOOGLE_SHEET_NAME!;
 errorIfMissing("GOOGLE_SHEET_NAME", googleSheetName);
 
-const startRowString = process.env.START_ROW!;
-errorIfMissing("START_ROW", startRowString);
-export const startRow = parseInt(startRowString);
+const startRowsString = process.env.START_ROWS!;
+errorIfMissing("START_ROWS", startRowsString);
+export const startRows = transformArrayStringToArray(startRowsString);
 
-export const startDate = process.env.START_DATE!;
-errorIfMissing("START_DATE", startDate);
+const startDatesString = process.env.START_DATES!;
+errorIfMissing("START_DATES", startDatesString);
+export const startDates = transformArrayStringToArray(startDatesString);
 
 export const dbUsername = process.env.DB_USERNAME!;
 errorIfMissing("DB_USERNAME", dbUsername);
