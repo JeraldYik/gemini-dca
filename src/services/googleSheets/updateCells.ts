@@ -36,12 +36,6 @@ const updateCells = async (
     });
   }
 
-  logger.info({
-    message: "temporary logger for updating google sheets values",
-    meta: {
-      values,
-    },
-  });
   const STARTING_LETTER_ASCII_CODE = cellRange[0].charCodeAt(0);
   const targetedRowNumber = cellRange[1];
   values.forEach((value, idx) => {
