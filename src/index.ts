@@ -56,17 +56,16 @@ const main = async () => {
 
         // order fulfilled
         if (!newOrder.is_live) {
-          const actualFiatDeposit = (
+          const actualFiatDeposit =
             parseFloat(newOrder.avg_execution_price) *
             parseFloat(newOrder.executed_amount) *
-            (1 + MAKER_TRADING_FEE)
-          ).toString();
+            (1 + MAKER_TRADING_FEE);
 
           return [
             todayDate,
             actualFiatDeposit,
-            newOrder.avg_execution_price,
-            newOrder.executed_amount,
+            parseFloat(newOrder.avg_execution_price),
+            parseFloat(newOrder.executed_amount),
           ];
         }
 
@@ -84,17 +83,16 @@ const main = async () => {
             },
           });
 
-          const actualFiatDeposit = (
+          const actualFiatDeposit =
             parseFloat(fulfilledOrder.avg_execution_price) *
             parseFloat(fulfilledOrder.executed_amount) *
-            (1 + MAKER_TRADING_FEE)
-          ).toString();
+            (1 + MAKER_TRADING_FEE);
 
           return [
             todayDate,
             actualFiatDeposit,
-            fulfilledOrder!.avg_execution_price,
-            fulfilledOrder!.executed_amount,
+            parseFloat(fulfilledOrder!.avg_execution_price),
+            parseFloat(fulfilledOrder!.executed_amount),
           ];
         }
         counter++;
