@@ -12,6 +12,12 @@ errorIfMissing("GEMINI_API_KEY", geminiApiKey);
 export const geminiApiSecret = process.env.GEMINI_API_SECRET!;
 errorIfMissing("GEMINI_API_SECRET", geminiApiSecret);
 
+const dailyFiatAmountsString = process.env.DAILY_FIAT_AMOUNTS!;
+errorIfMissing("DAILY_FIAT_AMOUNTS", dailyFiatAmountsString);
+export const dailyFiatAmounts = transformArrayStringToArray(
+  dailyFiatAmountsString
+).map((e) => parseInt(e));
+
 export const googleSheetId = process.env.GOOGLE_SHEET_ID!;
 errorIfMissing("GOOGLE_SHEET_ID", googleSheetId);
 
