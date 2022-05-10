@@ -36,8 +36,10 @@ const updateCells = async (
     });
   }
 
+  // Assume that starting letter is only 1 char
   const STARTING_LETTER_ASCII_CODE = cellRange[0].charCodeAt(0);
-  const targetedRowNumber = cellRange[1];
+  // to account for multi-digit row number
+  const targetedRowNumber = cellRange.slice(1).split(":")[0];
   values.forEach((value, idx) => {
     const letter = String.fromCharCode(STARTING_LETTER_ASCII_CODE + idx);
     const cell = sheet.getCellByA1(`${letter}${targetedRowNumber}`);
