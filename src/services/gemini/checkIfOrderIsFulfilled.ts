@@ -19,6 +19,7 @@ const checkIfOrderIsFulfilled = async ({
       "Order is not cancelled. Running loop for 6 hours to check for fulfillment of order",
     meta: {
       orderId,
+      tickerSymbol,
     },
   });
 
@@ -56,6 +57,7 @@ const checkIfOrderIsFulfilled = async ({
       message: "Failed to cancel order",
       meta: {
         orderId,
+        tickerSymbol,
       },
       error,
     });
