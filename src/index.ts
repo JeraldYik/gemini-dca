@@ -28,7 +28,7 @@ const main = async () => {
     Object.entries(TICKERS),
     async (coinInfo) => {
       const tickerMetadata = coinInfo[1];
-      // Assume that Gemini logic is well-tested with unit tests, hence Gemini portion is skipped for sandbox environment, as order books is sparsely populated
+      // Assume that Gemini logic is well-tested with unit tests, hence Gemini portion is skipped for sandbox environment, as order books are sparsely populated
       if (isSandboxEnv) {
         return [
           todayDate,
@@ -38,7 +38,7 @@ const main = async () => {
         ];
       }
 
-      const MAX_COUNTER = 9;
+      const MAX_COUNTER = 10;
       let counter = 0;
       let newOrder: OrderStatus = {} as OrderStatus;
       while (counter < MAX_COUNTER) {
