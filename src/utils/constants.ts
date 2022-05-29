@@ -1,7 +1,8 @@
-import { Ticker } from "../../types";
-import { dailyFiatAmounts } from "./config";
+import { dailyFiatAmounts, orderPriceToBidPriceRatio } from "./config";
 
-export const ORDER_PRICE_TO_BID_PRICE_RATIO = 0.995;
+import { Ticker } from "../../types";
+
+export const ORDER_PRICE_TO_BID_PRICE_RATIO = orderPriceToBidPriceRatio;
 
 export const TICKERS: Ticker = {
   BTC: {

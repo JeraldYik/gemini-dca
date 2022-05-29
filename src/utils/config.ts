@@ -18,6 +18,16 @@ export const dailyFiatAmounts = transformArrayStringToArray(
   dailyFiatAmountsString
 ).map((e) => parseInt(e));
 
+const orderPriceToBidPriceRatioString =
+  process.env.ORDER_PRICE_TO_BID_PRICE_RATIO!;
+errorIfMissing(
+  "ORDER_PRICE_TO_BID_PRICE_RATIO",
+  orderPriceToBidPriceRatioString
+);
+export const orderPriceToBidPriceRatio = parseFloat(
+  orderPriceToBidPriceRatioString
+);
+
 export const googleSheetId = process.env.GOOGLE_SHEET_ID!;
 errorIfMissing("GOOGLE_SHEET_ID", googleSheetId);
 
