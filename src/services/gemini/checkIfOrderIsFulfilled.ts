@@ -31,7 +31,7 @@ const checkIfOrderIsFulfilled = async ({
       externalLoopCounter,
       60,
       counter,
-      30
+      60
     );
     logger.info({
       message: "Delaying 30s",
