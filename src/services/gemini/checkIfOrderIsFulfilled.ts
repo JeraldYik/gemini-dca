@@ -23,7 +23,7 @@ const checkIfOrderIsFulfilled = async ({
     },
   });
 
-  // do note that this method would be ran 6 times, each time 1 hour long
+  // do note that this method would be ran 12 times, each time 1 hour long
   const MAX_COUNTER = 120; // 1 hour / 30 seconds
   let counter = 0;
   while (counter < MAX_COUNTER) {

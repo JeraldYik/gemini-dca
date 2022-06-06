@@ -38,7 +38,7 @@ const main = async () => {
         ];
       }
 
-      const MAX_COUNTER = 10;
+      const MAX_COUNTER = 12;
       let counter = 0;
       let newOrder: OrderStatus = {} as OrderStatus;
       while (counter < MAX_COUNTER) {
