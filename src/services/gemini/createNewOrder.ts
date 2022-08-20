@@ -19,7 +19,7 @@ const createNewOrder = async (
        * largest tick size is 1e-6
        */
       amount: orderAmount.toFixed(6),
-      price: orderPrice.toFixed(2),
+      price: orderPrice.toFixed(5),
       side: "buy",
       options: ["maker-or-cancel"],
     });
