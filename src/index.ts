@@ -109,7 +109,7 @@ const main = async () => {
       return [];
     },
 
-    { concurrency: 2 }
+    { concurrency: Object.keys(TICKERS).length }
   );
 
   const possiblyUndefinedBulkCreateTransactionRows = await bluebird.map(
