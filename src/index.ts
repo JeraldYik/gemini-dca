@@ -158,7 +158,7 @@ const main = async () => {
 
       return orderAttributes;
     },
-    { concurrency: 2 }
+    { concurrency: 1 }
   );
 
   const bulkCreateTransactionRows =
