@@ -16,7 +16,7 @@ const createNewOrder = async (
       symbol: tickerMetadata.symbol,
       /**
        * https://docs.gemini.com/rest-api/?python#symbols-and-minimums
-       * Between btcsgd & ethsgd, ethsgd has the larger tick size of 1e-6
+       * largest tick size is 1e-6
        */
       amount: orderAmount.toFixed(6),
       price: orderPrice.toFixed(2),
