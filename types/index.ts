@@ -4,6 +4,8 @@ export type TickerMetadata = {
   symbol: string;
   dailyFiatAmount: number;
   googleSheetCellRange: string;
+  tickSizePrecision: number;
+  priceIncrementPrecision: number;
 };
 
 export type OrderStatus = {

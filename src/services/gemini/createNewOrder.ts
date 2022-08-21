@@ -14,12 +14,8 @@ const createNewOrder = async (
   try {
     orderStatusData = await restClient.newOrder({
       symbol: tickerMetadata.symbol,
-      /**
-       * https://docs.gemini.com/rest-api/?python#symbols-and-minimums
-       * largest tick size is 1e-6
-       */
-      amount: orderAmount.toFixed(6),
-      price: orderPrice.toFixed(5),
+      amount: orderAmount.toFixed(tickerMetadata.tickSizePrecision),
+      price: orderPrice.toFixed(tickerMetadata.priceIncrementPrecision),
       side: "buy",
       options: ["maker-or-cancel"],
     });
