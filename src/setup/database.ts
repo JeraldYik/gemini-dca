@@ -26,5 +26,5 @@ export const elephantSqlSequelize = new Sequelize({
   password: elephantSqlDbPassword,
   host: elephantSqlDbHost,
   dialect: "postgres",
-  timezone: "-04:00",
+  timezone: "+08:00",
 });
