@@ -1,6 +1,6 @@
 import { DataTypes, Model, ModelDefined } from "sequelize";
 
-import { sequelize } from "../../../setup/database";
+import { elephantSqlSequelize } from "../../../setup/database";
 import { startOfDay } from "date-fns";
 
 export type OrderAttributes = {
@@ -15,7 +15,7 @@ export type OrderModel = Model<OrderAttributes, OrderAttributes>;
 
 type OrderModelDefined = ModelDefined<OrderAttributes, OrderAttributes>;
 
-const Order: OrderModelDefined = sequelize.define(
+const Order: OrderModelDefined = elephantSqlSequelize.define(
   "Order",
   {
     id: {

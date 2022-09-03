@@ -1,11 +1,11 @@
 import Order, {
   OrderAttributes,
-} from "../../../src/services/database/models/order";
+} from "../../../src/services/database/models/heroku_order";
 
 import { Sequelize } from "sequelize";
-import bulkInsertRowIntoDb from "../../../src/services/database/bulkInsertRowIntoDb";
+import bulkInsertRowIntoDb from "../../../src/services/database/heroku_bulkInsertRowIntoDb";
 import { expect } from "chai";
-import { sequelize } from "./../../../src/setup/database";
+import { herokuSequelize as sequelize } from "./../../../src/setup/database";
 import { startOfDay } from "date-fns";
 
 describe("UNIT TEST: Bulk Insert into database", async () => {

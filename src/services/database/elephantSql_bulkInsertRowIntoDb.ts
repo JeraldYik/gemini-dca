@@ -1,4 +1,4 @@
-import Order, { OrderAttributes } from "./models/order";
+import Order, { OrderAttributes } from "./models/elephantSql_order";
 
 import { logger } from "../../utils/logger";
 
