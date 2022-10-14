@@ -53,28 +53,28 @@ errorIfMissing("START_DATES", startDatesString);
 export const startDates = transformArrayStringToArray(startDatesString);
 
 export const herokuDbUsername = process.env.HEROKU_DB_USERNAME!;
-errorIfMissing("DB_USERNAME", herokuDbUsername);
+errorIfMissing("HEROKU_DB_USERNAME", herokuDbUsername);
 
 export const herokuDbPassword = process.env.HEROKU_DB_PASSWORD!;
-errorIfMissing("DB_PASSWORD", herokuDbPassword);
+errorIfMissing("HEROKU_DB_PASSWORD", herokuDbPassword);
 
 export const herokuDbName = process.env.HEROKU_DB_NAME!;
-errorIfMissing("DB_NAME", herokuDbName);
+errorIfMissing("HEROKU_DB_NAME", herokuDbName);
 
 export const herokuDbHost = process.env.HEROKU_DB_HOST!;
-errorIfMissing("DB_HOST", herokuDbHost);
+errorIfMissing("HEROKU_DB_HOST", herokuDbHost);
 
 export const elephantSqlDbUsername = process.env.ELEPHANTSQL_DB_USERNAME!;
-errorIfMissing("DB_USERNAME", elephantSqlDbUsername);
+errorIfMissing("ELEPHANTSQL_DB_USERNAME", elephantSqlDbUsername);
 
 export const elephantSqlDbPassword = process.env.ELEPHANTSQL_DB_PASSWORD!;
-errorIfMissing("DB_PASSWORD", elephantSqlDbPassword);
+errorIfMissing("ELEPHANTSQL_DB_PASSWORD", elephantSqlDbPassword);
 
 export const elephantSqlDbName = process.env.ELEPHANTSQL_DB_NAME!;
-errorIfMissing("DB_NAME", elephantSqlDbName);
+errorIfMissing("ELEPHANTSQL_DB_NAME", elephantSqlDbName);
 
 export const elephantSqlDbHost = process.env.ELEPHANTSQL_DB_HOST!;
-errorIfMissing("DB_HOST", elephantSqlDbHost);
+errorIfMissing("ELEPHANTSQL_DB_HOST", elephantSqlDbHost);
 
 export const sentryDsn = process.env.SENTRY_DSN!;
 errorIfMissing("SENTRY_DSN", sentryDsn);
