@@ -3,7 +3,7 @@ import Order, {
 } from "../../../src/services/database/models/heroku_order";
 
 import { Sequelize } from "sequelize";
-import bulkInsertRowIntoDb from "../../../src/services/database/heroku_bulkInsertRowIntoDb";
+import bulkInsertRowIntoDb from "../../../src/services/database/elephantSql_bulkInsertRowIntoDb";
 import { expect } from "chai";
 import { herokuSequelize as sequelize } from "./../../../src/setup/database";
 import { startOfDay } from "date-fns";

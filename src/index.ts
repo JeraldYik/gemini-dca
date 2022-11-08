@@ -14,7 +14,6 @@ import checkIfOrderIsFulfilled from "./services/gemini/checkIfOrderIsFulfilled";
 import createNewOrder from "./services/gemini/createNewOrder";
 import elephantSqlBulkInsert from "./services/database/elephantSql_bulkInsertRowIntoDb";
 import getTickerBestBidPrice from "./services/gemini/getTickerBestBidPrice";
-import herokuBulkInsert from "./services/database/heroku_bulkInsertRowIntoDb";
 import { initialiseGoogleDocument } from "./setup/googleSheets";
 import { logger } from "./utils/logger";
 import updateCells from "./services/googleSheets/updateCells";
@@ -166,7 +165,7 @@ const main = async () => {
     possiblyUndefinedBulkCreateTransactionRows.filter(
       (row): row is OrderAttributes => !!row
     );
-  await herokuBulkInsert(bulkCreateTransactionRows);
+
   await elephantSqlBulkInsert(bulkCreateTransactionRows);
 };
 

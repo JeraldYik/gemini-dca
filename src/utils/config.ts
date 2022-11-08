@@ -52,18 +52,6 @@ const startDatesString = process.env.START_DATES!;
 errorIfMissing("START_DATES", startDatesString);
 export const startDates = transformArrayStringToArray(startDatesString);
 
-export const herokuDbUsername = process.env.HEROKU_DB_USERNAME!;
-errorIfMissing("HEROKU_DB_USERNAME", herokuDbUsername);
-
-export const herokuDbPassword = process.env.HEROKU_DB_PASSWORD!;
-errorIfMissing("HEROKU_DB_PASSWORD", herokuDbPassword);
-
-export const herokuDbName = process.env.HEROKU_DB_NAME!;
-errorIfMissing("HEROKU_DB_NAME", herokuDbName);
-
-export const herokuDbHost = process.env.HEROKU_DB_HOST!;
-errorIfMissing("HEROKU_DB_HOST", herokuDbHost);
-
 export const elephantSqlDbUsername = process.env.ELEPHANTSQL_DB_USERNAME!;
 errorIfMissing("ELEPHANTSQL_DB_USERNAME", elephantSqlDbUsername);
 
