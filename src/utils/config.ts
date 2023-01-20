@@ -48,9 +48,8 @@ const startRowsString = process.env.START_ROWS!;
 errorIfMissing("START_ROWS", startRowsString);
 export const startRows = transformArrayStringToArray(startRowsString);
 
-const startDatesString = process.env.START_DATES!;
-errorIfMissing("START_DATES", startDatesString);
-export const startDates = transformArrayStringToArray(startDatesString);
+export const startDate = process.env.START_DATE!;
+errorIfMissing("START_DATE", startDate);
 
 export const elephantSqlDbUsername = process.env.ELEPHANTSQL_DB_USERNAME!;
 errorIfMissing("ELEPHANTSQL_DB_USERNAME", elephantSqlDbUsername);

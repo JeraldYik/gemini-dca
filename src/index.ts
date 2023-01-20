@@ -3,7 +3,7 @@ import { differenceInCalendarDays, startOfDay } from "date-fns";
 import {
   googleSheetName,
   isSandboxEnv,
-  startDates,
+  startDate,
   startRows,
 } from "./utils/config";
 
@@ -23,6 +23,21 @@ const main = async () => {
   const todayDate = new Date().toLocaleDateString("en-SG", {
     timeZone: "Asia/Singapore",
   });
+
+  const splitStartDate = startDate.split("/").map((d) => parseInt(d));
+  const differenceInDays = differenceInCalendarDays(
+    new Date(),
+    new Date(splitStartDate[2], splitStartDate[1] - 1, splitStartDate[0])
+  );
+
+  if (differenceInDays < 0) {
+    logger.error({
+      message: "Start date of recording is later than today",
+      meta: {
+        startDate,
+      },
+    });
+  }
 
   const transactionValues = await bluebird.map(
     Object.entries(TICKERS),
@@ -120,22 +135,7 @@ const main = async () => {
         return undefined;
       }
 
-      const startDate = startDates[idx];
       const startRow = parseInt(startRows[idx]);
-      const splitStartDate = startDates[idx].split("/").map((d) => parseInt(d));
-      const differenceInDays = differenceInCalendarDays(
-        new Date(),
-        new Date(splitStartDate[2], splitStartDate[1] - 1, splitStartDate[0])
-      );
-
-      if (differenceInDays < 0) {
-        logger.error({
-          message: "Start date of recording is later than today",
-          meta: {
-            startDate,
-          },
-        });
-      }
 
       const googleSheetsCellRangeWithoutRowNumber =
         Object.values(TICKERS)[idx].googleSheetCellRange;

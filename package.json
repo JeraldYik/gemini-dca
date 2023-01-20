@@ -6,7 +6,8 @@
   "scripts": {
     "test": "source dev.env && mocha test/**/*.test.ts --timeout 10000",
     "dev": "source dev.env && ts-node src/index.ts",
-    "schedule": "ts-node src/index.ts"
+    "schedule": "ts-node src/index.ts",
+    "heroku-prod-logs": "heroku logs --remote production"
   },
   "repository": {
     "type": "git",
