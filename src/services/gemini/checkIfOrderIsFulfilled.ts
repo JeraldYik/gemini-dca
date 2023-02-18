@@ -16,14 +16,14 @@ const checkIfOrderIsFulfilled = async ({
 }): Promise<OrderStatus | undefined> => {
   logger.info({
     message:
-      "Order is not cancelled. Running loop for 6 hours to check for fulfillment of order",
+      "Order is not cancelled. Running loop to check for fulfillment of order",
     meta: {
       orderId,
       tickerSymbol,
     },
   });
 
-  // do note that this method would be ran 12 times, each time 1 hour long
+  // do note that this method would be ran 23 times, each time 1 hour long
   const MAX_COUNTER = 120; // 1 hour / 30 seconds
   let counter = 0;
   while (counter < MAX_COUNTER) {

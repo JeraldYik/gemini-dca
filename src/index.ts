@@ -53,7 +53,7 @@ const main = async () => {
         ];
       }
 
-      const MAX_COUNTER = 12;
+      const MAX_COUNTER = 23;
       let counter = 0;
       let newOrder: OrderStatus = {} as OrderStatus;
       while (counter < MAX_COUNTER) {
@@ -62,11 +62,13 @@ const main = async () => {
         );
         newOrder = await createNewOrder(tickerMetadata, tickerBestBidPrice);
 
-        if (newOrder.is_cancelled) {
+        if (!newOrder || newOrder.is_cancelled) {
           logger.error({
             message: "Order has been cancelled upon creation",
             meta: { ...newOrder },
           });
+
+          return [];
         }
 
         // order fulfilled
@@ -114,7 +116,7 @@ const main = async () => {
       }
 
       logger.warn({
-        message: "Order not fulfilled within 10 hours",
+        message: "Order not fulfilled within 23 hours",
         meta: {
           orderId: newOrder.order_id,
           symbol: tickerMetadata.symbol,
