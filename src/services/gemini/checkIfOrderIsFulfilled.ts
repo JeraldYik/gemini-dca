@@ -1,9 +1,9 @@
 import { OrderStatus } from "../../../types";
+import { restClient } from "../../setup/gemini";
 import counterToTimeElapsed from "../../utils/counterToTimeElapsed";
 import delay from "../../utils/delay";
-import getOrderStatus from "./getOrderStatus";
 import { logger } from "../../utils/logger";
-import { restClient } from "../../setup/gemini";
+import getOrderStatus from "./getOrderStatus";
 
 const checkIfOrderIsFulfilled = async ({
   orderId,
@@ -24,7 +24,7 @@ const checkIfOrderIsFulfilled = async ({
   });
 
   // do note that this method would be ran 23 times, each time 1 hour long
-  const MAX_COUNTER = 120; // 1 hour / 30 seconds
+  const MAX_COUNTER = 60; // 1 hour / 1 min
   let counter = 0;
   while (counter < MAX_COUNTER) {
     const timeElapsed = counterToTimeElapsed(
@@ -34,7 +34,7 @@ const checkIfOrderIsFulfilled = async ({
       60
     );
     logger.info({
-      message: "Delaying 30s",
+      message: "Delaying 1min",
       meta: {
         orderId,
         timeElapsed,
@@ -42,7 +42,7 @@ const checkIfOrderIsFulfilled = async ({
       },
     });
 
-    await delay(30000);
+    await delay(60000);
 
     const orderStatusData = await getOrderStatus(orderId);
     if (!orderStatusData.is_live) return orderStatusData;
