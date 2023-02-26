@@ -45,7 +45,8 @@ const checkIfOrderIsFulfilled = async ({
     await delay(60000);
 
     const orderStatusData = await getOrderStatus(orderId);
-    if (!orderStatusData.is_live) return orderStatusData;
+    if (!orderStatusData.is_live || orderStatusData.is_cancelled)
+      return orderStatusData;
 
     counter++;
   }

@@ -1,4 +1,3 @@
-import { MAKER_TRADING_FEE, TICKERS } from "./utils/constants";
 import { differenceInCalendarDays, startOfDay } from "date-fns";
 import {
   googleSheetName,
@@ -6,17 +5,18 @@ import {
   startDate,
   startRows,
 } from "./utils/config";
+import { MAKER_TRADING_FEE, TICKERS } from "./utils/constants";
 
-import { OrderAttributes } from "./services/database/models/heroku_order";
-import { OrderStatus } from "../types/index";
 import bluebird from "bluebird";
+import { OrderStatus } from "../types/index";
+import elephantSqlBulkInsert from "./services/database/elephantSql_bulkInsertRowIntoDb";
+import { OrderAttributes } from "./services/database/models/heroku_order";
 import checkIfOrderIsFulfilled from "./services/gemini/checkIfOrderIsFulfilled";
 import createNewOrder from "./services/gemini/createNewOrder";
-import elephantSqlBulkInsert from "./services/database/elephantSql_bulkInsertRowIntoDb";
 import getTickerBestBidPrice from "./services/gemini/getTickerBestBidPrice";
+import updateCells from "./services/googleSheets/updateCells";
 import { initialiseGoogleDocument } from "./setup/googleSheets";
 import { logger } from "./utils/logger";
-import updateCells from "./services/googleSheets/updateCells";
 
 const main = async () => {
   const doc = await initialiseGoogleDocument();
@@ -93,6 +93,15 @@ const main = async () => {
         });
 
         if (fulfilledOrder) {
+          if (fulfilledOrder.is_cancelled) {
+            logger.info({
+              message: "Order cancelled",
+              meta: {
+                ...fulfilledOrder,
+              },
+            });
+            return [];
+          }
           logger.info({
             message: "Order fulfilled",
             meta: {
