@@ -43,6 +43,10 @@ const main = async () => {
     Object.entries(TICKERS),
     async (coinInfo) => {
       const tickerMetadata = coinInfo[1];
+      // purchase for this coin is temporarily turned off
+      if (tickerMetadata.dailyFiatAmount <= 0) {
+        return [];
+      }
       // Assume that Gemini logic is well-tested with unit tests, hence Gemini portion is skipped for sandbox environment, as order books are sparsely populated
       if (isSandboxEnv) {
         return [
@@ -141,7 +145,7 @@ const main = async () => {
   const possiblyUndefinedBulkCreateTransactionRows = await bluebird.map(
     transactionValues,
     async (values, idx) => {
-      // for unfilled and then cancelled orders
+      // for unpurchased coins, unfilled and then cancelled orders
       if (values.length === 0) {
         return undefined;
       }
