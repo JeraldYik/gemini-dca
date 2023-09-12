@@ -1,8 +1,8 @@
 import { OrderStatus, TickerMetadata } from "../../../types";
 
+import { restClient } from "../../setup/gemini";
 import { ORDER_PRICE_TO_BID_PRICE_RATIO } from "../../utils/constants";
 import { logger } from "../../utils/logger";
-import { restClient } from "../../setup/gemini";
 
 const createNewOrder = async (
   tickerMetadata: TickerMetadata,
@@ -10,6 +10,16 @@ const createNewOrder = async (
 ): Promise<OrderStatus> => {
   const orderPrice = tickerBestBidPrice * ORDER_PRICE_TO_BID_PRICE_RATIO;
   const orderAmount = tickerMetadata.dailyFiatAmount / orderPrice;
+  logger.info({
+    message: "Create Order data",
+    meta: {
+      tickerBestBidPrice,
+      dailyFiatAmount: tickerMetadata.dailyFiatAmount,
+      orderPrice,
+      orderAmount,
+    },
+  });
+
   let orderStatusData: OrderStatus;
   try {
     orderStatusData = await restClient.newOrder({

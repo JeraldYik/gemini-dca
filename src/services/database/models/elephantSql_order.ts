@@ -1,7 +1,7 @@
 import { DataTypes, Model, ModelDefined } from "sequelize";
 
 import { elephantSqlSequelize } from "../../../setup/database";
-import { startOfDay } from "date-fns";
+import { TODAY_DATE } from "../../../utils/constants";
 
 export type OrderAttributes = {
   ticker: string;
@@ -31,7 +31,7 @@ const Order: OrderModelDefined = elephantSqlSequelize.define(
     createdForDay: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: startOfDay(new Date()),
+      defaultValue: TODAY_DATE,
     },
     fiatDepositInSgd: {
       type: DataTypes.FLOAT,

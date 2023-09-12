@@ -1,3 +1,4 @@
+import { add, startOfDay } from "date-fns";
 import { dailyFiatAmounts, orderPriceToBidPriceRatio } from "./config";
 
 import { Ticker } from "../../types";
@@ -44,3 +45,9 @@ export const TICKERS: Ticker = {
 } as const;
 
 export const MAKER_TRADING_FEE = 0.002;
+
+export const TODAY_DATE_STR = new Date().toLocaleDateString("en-SG", {
+  timeZone: "Asia/Singapore",
+});
+
+export const TODAY_DATE = startOfDay(add(new Date(), { hours: 8 }));

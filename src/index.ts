@@ -1,16 +1,21 @@
-import { differenceInCalendarDays, startOfDay } from "date-fns";
 import {
   googleSheetName,
   isSandboxEnv,
   startDate,
   startRows,
 } from "./utils/config";
-import { MAKER_TRADING_FEE, TICKERS } from "./utils/constants";
+import {
+  MAKER_TRADING_FEE,
+  TICKERS,
+  TODAY_DATE,
+  TODAY_DATE_STR,
+} from "./utils/constants";
 
 import bluebird from "bluebird";
+import { differenceInCalendarDays } from "date-fns";
 import { OrderStatus } from "../types/index";
 import elephantSqlBulkInsert from "./services/database/elephantSql_bulkInsertRowIntoDb";
-import { OrderAttributes } from "./services/database/models/heroku_order";
+import { OrderAttributes } from "./services/database/models/elephantSql_order";
 import checkIfOrderIsFulfilled from "./services/gemini/checkIfOrderIsFulfilled";
 import createNewOrder from "./services/gemini/createNewOrder";
 import getTickerBestBidPrice from "./services/gemini/getTickerBestBidPrice";
@@ -20,9 +25,6 @@ import { logger } from "./utils/logger";
 
 const main = async () => {
   const doc = await initialiseGoogleDocument();
-  const todayDate = new Date().toLocaleDateString("en-SG", {
-    timeZone: "Asia/Singapore",
-  });
 
   const splitStartDate = startDate.split("/").map((d) => parseInt(d));
   const differenceInDays = differenceInCalendarDays(
@@ -50,7 +52,7 @@ const main = async () => {
       // Assume that Gemini logic is well-tested with unit tests, hence Gemini portion is skipped for sandbox environment, as order books are sparsely populated
       if (isSandboxEnv) {
         return [
-          todayDate,
+          TODAY_DATE_STR,
           tickerMetadata.dailyFiatAmount * (1 + MAKER_TRADING_FEE),
           1000,
           1,
@@ -83,7 +85,7 @@ const main = async () => {
             (1 + MAKER_TRADING_FEE);
 
           return [
-            todayDate,
+            TODAY_DATE_STR,
             actualFiatDeposit,
             parseFloat(newOrder.avg_execution_price),
             parseFloat(newOrder.executed_amount),
@@ -119,7 +121,7 @@ const main = async () => {
             (1 + MAKER_TRADING_FEE);
 
           return [
-            todayDate,
+            TODAY_DATE_STR,
             actualFiatDeposit,
             parseFloat(fulfilledOrder!.avg_execution_price),
             parseFloat(fulfilledOrder!.executed_amount),
@@ -165,7 +167,7 @@ const main = async () => {
 
       const orderAttributes: OrderAttributes = {
         ticker: Object.values(TICKERS)[idx].symbol,
-        createdForDay: startOfDay(new Date()),
+        createdForDay: TODAY_DATE,
         fiatDepositInSgd: values[1] as number,
         pricePerCoinInSgd: values[2] as number,
         coinAmount: values[3] as number,
