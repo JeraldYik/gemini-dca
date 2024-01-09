@@ -39,6 +39,7 @@ const main = async () => {
         startDate,
       },
     });
+    throw new Error("Start date of recording is later than today");
   }
 
   const transactionValues = await bluebird.map(
